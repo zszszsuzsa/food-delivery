@@ -1,27 +1,29 @@
 import api from '../../api/api.js';
 import CategoryItem from './Category-item/category-item.vue';
 import MenuItem from './Menu-item/menu-item.vue';
-
+import { mapActions, mapState } from 'vuex';
+import store from '../../common/store';
 
 export default {
-    data() {
-        return {
-            categories: [],
-            menu: [],
-            keyword:'',
-            clicked: false
-        }
-
-    },
     components: {
         CategoryItem,
         MenuItem
+    },
+    data() {
+        return {
+            categories: []
+        }
+    },
+    props:{
+        searched:{
+            required:false
+        },
     },
     methods: {
         getCategories() {
             return new Promise((resolve, reject) => {
                 api.getCategoryNames().then(result => {
-                    resolve(this.categories = result.data, this.clicked=true);
+                    resolve(this.categories = result.data);
                 })
                     .catch(error => {
                         console.error("Nem sikerült a lekérni a kategóriák neveit", {
@@ -34,7 +36,7 @@ export default {
         getMenuByCategory(category) {
             return new Promise((resolve, reject) => {
                 api.getMenuByCategory(category).then(result => {
-                    resolve(this.menu = result.data, this.clicked=true);
+                    resolve(this.setMenuContent(result.data), this.searched=false);
                 })
                     .catch(error => {
                         console.error("Nem sikerült lekérni a katgóriát", {
@@ -44,12 +46,15 @@ export default {
                     })
             });
         },
-        showSearchResult(){
-            this.menu=this.searchresult;
-        }
+        setMenuContent(result){
+                store.dispatch('menu/setMenu', result)
+        },
+        ...mapActions('menu', ['setMenu'])
     },
     mounted() {
         this.getCategories()
-        // this.getMenuByCategory(this.categories)
+    },
+    computed:{
+        ...mapState('menu',['menu'])
     }
 }

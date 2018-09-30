@@ -2,7 +2,7 @@ nav.navbar.navbar-expand-lg.navbar-light
 	a.navbar-brand(href='#') 
 		i.fas.fa-utensils 
 		p Ételfutár
-	form.form-inline.my-2.my-lg-0
+	form.form-inline.my-2.my-lg-0(action="#")
 		input.form-control.mr-sm-2(type='search', placeholder='Keresés', aria-label='Search' v-model="keyword")
 		button.btn.btn-outline-light(@click="searchKeyword")
 			i.fas.fa-search

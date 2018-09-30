@@ -1,4 +1,5 @@
 import CartComponent from '../Cart/cart.vue';
+import {mapState, mapActions } from 'vuex';
 
 export default {
     components: {
@@ -20,6 +21,10 @@ export default {
     methods:{
         searchKeyword(){
             this.$emit('on-set-keyword', this.keyword);
-        }
-    }
+        },
+        ...mapActions('menu', ['setMenu']),
+    },
+    // computed:{
+    //     ...mapState('menu', ['menuState']),
+    // }
 }

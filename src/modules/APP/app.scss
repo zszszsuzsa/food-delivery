@@ -1,0 +1,22 @@
+html, body{
+	font-family:sans-serif;
+	background:url("http://d34p1wgog7nh4l.cloudfront.net/wp-content/uploads/2015/09/bg2.jpg");
+	background-size: cover;
+	nav{
+		background-color:#c21318;
+	}
+	.container-fluid{
+		.container.main{
+			background-color: rgba(255, 255, 255, 0.6);
+			padding-top:20px;
+			margin-top:50px;
+			button{
+				background-color:#39ac73;
+				border:none;
+				margin-bottom: 20px;
+				margin-right:10px;
+				display:inline-block;
+			}
+		}
+	}
+}

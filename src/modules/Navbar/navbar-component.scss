@@ -1,0 +1,31 @@
+#navbarSupportedContent{
+    a.white-cart{
+        color:white;
+    }
+    p.white-cart{
+        color:white;
+        display:inline-block;
+        margin:0;
+    }
+    i.white-cart{  
+        color:white;
+        margin:0px 3px 0px 3px;
+    }
+    .navbar-nav.mr-auto{
+        margin-left:5px;
+        .nav-item.dropdown{
+      
+        }
+    }
+}
+.navbar-brand {
+    i{  
+        color:white;
+        margin-right:5px;
+    }
+    p {
+        color:white;
+        margin-top:17px;
+        display:inline-block;
+    }
+}

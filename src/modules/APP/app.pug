@@ -1,0 +1,18 @@
+doctype html
+html(lang="hu")
+	head
+		meta(charset="UTF-8")
+		title Ételfutár
+		link(rel="stylesheet" href="http://static.sasongsmat.nu/fonts/vegetarian.css")
+		link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU",crossorigin="anonymous")
+	body
+		#app(v-cloak)
+			navbar-component(@on-set-keyword='getSearchResult')
+			.container-fluid
+				.container.main
+					.row
+						.col-3
+							popular-orders(:popularOrders='popularOrders')
+						.col-6
+							menu-component(:searchresult='searchResult')
+						.col-3

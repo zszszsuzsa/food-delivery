@@ -57,13 +57,20 @@ app.get('/categorynames', function (req, res) {
   })
 });
 
-// Top orders
+// Top orders Count
 app.get('/popular', function (req, res) {
-  con.query('SELECT Name,Price,COUNT(*) as Quantity FROM dbo.Orders GROUP BY Name Order BY Quantity DESC limit 10', function (err, rows, fields) {
+  con.query('SELECT Menu_item_id,Name,Price,COUNT(*) as Quantity FROM dbo.Orders GROUP BY Name Order BY Quantity DESC limit 10', function (err, rows, fields) {
     if (err) throw err;
     res.json(rows);
   })
 });
+// Top orders Sum
+// app.get('/popular', function (req, res) {
+//   con.query('SELECT Menu_item_id,Name,Price,sum(Quantity) as Quantity FROM dbo.Orders GROUP BY Menu_item_id Order BY Quantity DESC limit 10', function (err, rows, fields) {
+//     if (err) throw err;
+//     res.json(rows);
+//   })
+// });
 
 // Search
 app.get('/search/:keyword', function (req, res) {

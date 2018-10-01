@@ -11,13 +11,14 @@ export default {
     },
     data() {
         return {
-            categories: []
+            categories: [],
+            menuItem:{}
         }
     },
     props:{
         searched:{
             required:false
-        },
+        }
     },
     methods: {
         getCategories() {
@@ -49,7 +50,13 @@ export default {
         setMenuContent(result){
                 store.dispatch('menu/setMenu', result)
         },
-        ...mapActions('menu', ['setMenu'])
+        sendToCart(item){
+            this.menuItem=item;
+            store.dispatch('cart/addToCart', item)
+        },
+        ...mapActions('menu', ['setMenu']),
+        ...mapActions('cart', ['addToCart'])
+
     },
     mounted() {
         this.getCategories()

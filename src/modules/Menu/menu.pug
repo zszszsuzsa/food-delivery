@@ -2,4 +2,4 @@ div
 	.row.justify-content-center
 		category-item(v-for='category in categories',:key='category.Category', :category='category.Category', :menu='menu' @on-select-category='getMenuByCategory')
 	p.search-result(v-if='searched') A keresés eredménye:
-	menu-item(v-for='menuItem in menu',:key="menuItem.Id", :description='menuItem.Description', :name='menuItem.Name', :price='menuItem.Price', :spicy='menuItem.Spicy', :vegetarian='menuItem.Vegetarian',:clicked='clicked')
+	menu-item(v-for='menuItem in menu',:key="menuItem.Id", :menuItem='menuItem', :description='menuItem.Description', :name='menuItem.Name', :price='menuItem.Price', :spicy='menuItem.Spicy', :vegetarian='menuItem.Vegetarian', @on-forwardToCart="sendToCart")

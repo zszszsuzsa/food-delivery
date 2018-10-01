@@ -22,9 +22,12 @@ export default {
         searchKeyword(){
             this.$emit('on-set-keyword', this.keyword);
         },
+        keepOpen(e){
+            e.stopPropagation();
+        },
         ...mapActions('menu', ['setMenu']),
     },
-    // computed:{
-    //     ...mapState('menu', ['menuState']),
-    // }
+    computed:{
+        ...mapState('cart', ['length']),
+    }
 }

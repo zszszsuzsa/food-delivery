@@ -7,7 +7,6 @@ import PopularOrders from '../Popular-orders/popular-orders.vue';
 import { mapActions, mapState } from 'vuex';
 import store from '../../common/store';
 
-
 export default {
 	data() {
 		return {

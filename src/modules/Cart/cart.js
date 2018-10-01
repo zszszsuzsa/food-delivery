@@ -1,29 +1,22 @@
 import CartItem from './Cart-item/cart-item.vue';
-export default{
-    components:{
+import { mapState, mapActions } from 'vuex';
+import store from '../../common/store';
+
+
+export default {
+    components: {
         CartItem
     },
-    props:{
-        name:{
-            required:false
+    methods: {
+        remove(item, index) {
+            store.dispatch('cart/removeFromCart', { cartItem: item, index: index })
         },
-        price:{
-            required:false
-        }
-    },
-    data(){
-        return{
-            cartItems:[],
-            total: 0
-        }
-    },
-    methods:{
-        calulateTotal(){
-            this.price+=total;
+        remainOpen(e) {
+            e.stopPropagation();
         },
-        fillCartItems(){
-            this.cartItems.push([this.name, this.price])
-        }
+        ...mapActions('cart', ['removeFromCart'])
+    },
+    computed: {
+        ...mapState('cart', ['cart', 'total'])
     }
-
 }

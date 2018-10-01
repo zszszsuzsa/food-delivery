@@ -1,11 +1,23 @@
 .cart{
-    // background-image: url("../../images/orders_sticker.png");
     padding:10px;
     background-size:100%;
     background-repeat:no-repeat; 
     background-position: top center;
     .btn-success{
         background-color:#39ac73;
+        border:none;
+        margin-bottom: 20px;
+        margin-right:10px;
+        padding-top:5px;
+        padding-bottom:5px;
+    }
+    .red{
+        color:red;
+        font-weight: bold;
+    }
+    .btn-success.red{
+        background-color:red;
+        color:white;
         border:none;
         margin-bottom: 20px;
         margin-right:10px;

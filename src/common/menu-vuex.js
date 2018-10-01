@@ -7,9 +7,6 @@ export const menuMutations = {
 		state.menu = menu;
     }
 };
-export const menuGetters= {
-   getMenuState: ()=>menuState
-};
 
 export const menuActions = {
     setMenu(context, dataArray) { context.commit('setMenu', dataArray);} ,

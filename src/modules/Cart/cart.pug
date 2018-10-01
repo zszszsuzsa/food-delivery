@@ -11,4 +11,4 @@
 			tr.red(v-if='total>20000') Maximális rendelés 20 000 Ft!
 			tr
 				td
-					button.btn-success(:disabled="total>20000",v-bind:class="{ 'red': total>20000}") Megrendelem
+					button.btn-success(:disabled="wrongAmount",v-bind:class="{ red: wrongAmount}") Megrendelem

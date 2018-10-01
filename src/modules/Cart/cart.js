@@ -17,6 +17,6 @@ export default {
         ...mapActions('cart', ['removeFromCart'])
     },
     computed: {
-        ...mapState('cart', ['cart', 'total'])
+        ...mapState('cart', ['cart', 'total', 'wrongAmount'])
     }
 }

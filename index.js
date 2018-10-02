@@ -57,20 +57,14 @@ app.get('/categorynames', function (req, res) {
   })
 });
 
-// Top orders Count
+// Top orders Sum
 app.get('/popular', function (req, res) {
-  con.query('SELECT Menu_item_id,Name,Price,COUNT(*) as Quantity FROM dbo.Orders GROUP BY Name Order BY Quantity DESC limit 10', function (err, rows, fields) {
+  sql= 'SELECT Id,Name,Price,sum(Quantity)as Quantity FROM (SELECT * FROM dbo.Orders LEFT JOIN dbo.Menuitems ON dbo.Orders.Menu_item_id = dbo.Menuitems.Id) as Aggr GROUP BY Name Order BY Quantity DESC limit 10'
+  con.query(sql, function (err, rows, fields) {
     if (err) throw err;
     res.json(rows);
   })
 });
-// Top orders Sum
-// app.get('/popular', function (req, res) {
-//   con.query('SELECT Menu_item_id,Name,Price,sum(Quantity) as Quantity FROM dbo.Orders GROUP BY Menu_item_id Order BY Quantity DESC limit 10', function (err, rows, fields) {
-//     if (err) throw err;
-//     res.json(rows);
-//   })
-// });
 
 // Search
 app.get('/search/:keyword', function (req, res) {
@@ -81,19 +75,29 @@ app.get('/search/:keyword', function (req, res) {
   });
 });
 
-// app.get('/menubycategory', function (req, res) {
-//   let menu={};
-//   let category="";
-//   con.query('SELECT DISTINCT Category FROM dbo.MenuItems', function (err, rows, fields) {
-//     if (err) throw err;
-//     category=res.json(rows).Category;
-//     for (let i=0; i<res.length; i++){
-//       category=res.json(rows).Category;
-//       menu.push({category: {}})
-//     }
-//     return menu;
-//   })
-// });
+const bodyParser = require("body-parser");
+
+/** bodyParser.urlencoded(options)
+ * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
+ * and exposes the resulting object (containing the keys and values) on req.body
+ */
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+/**bodyParser.json(options)
+ * Parses the text as JSON and exposes the resulting object on req.body.
+ */
+app.use(bodyParser.json());
+
+app.post('/orderdata', function (req, res) {
+  var values=req.body;
+    con.query('INSERT INTO dbo.Orders(Menu_item_id,Buyer_name,Buyer_address,Buyer_phone)VALUES ?', [values], function (err) {
+      if (err) throw err;
+      res.send("OK");
+      console.log(values.length+"record(s) inserted");
+    })
+  });
 
 app.listen(8080, function () {
   console.log('app listening on port 8080');

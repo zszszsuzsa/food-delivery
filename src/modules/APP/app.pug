@@ -7,12 +7,15 @@ html(lang="hu")
 		link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU",crossorigin="anonymous")
 	body
 		#app(v-cloak)
-			navbar-component(@on-set-keyword='getSearchResult')
+			navbar-component(@on-set-keyword='getSearchResult',@on-checkout="toggleChecoutDialog")
 			.container-fluid
 				.container.main
+					button.btn.btn-success(data-toggle="modal" data-target="#checkout")
+					checkout(v-bind:class="{ show: checkout}", @on-cancel="toggleChecoutDialog")
 					.row
 						.col-sm-3
 							popular-orders(:popularOrders='popularOrders')
 						.col-sm-6
 							menu-component(:searched="searched")
 						.col-3
+			

@@ -15,5 +15,8 @@ export default {
     },
     getSearchResult(keyword){
         return axios.get(`http://localhost:8080/search/${keyword}`)
+    },
+    postCartContent(cart){
+        return axios.post(`http://localhost:8080/orderdata`, cart)
     }
 }

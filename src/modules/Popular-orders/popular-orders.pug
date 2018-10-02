@@ -1,4 +1,4 @@
 .popular-orders
     p Legnépszerűbb termékek:
     .container
-        popular-item(v-for='p in popularOrders',:key='p.Menu_item_id',:popularItem='p', :name='p.Name', :price='p.Price', @on-forwardToCart='sendToCart')
+        popular-item(v-for='p in popularOrders',:key='p.Id',:popularItem='p', :name='p.Name', :price='p.Price', @on-forwardToCart='sendToCart')

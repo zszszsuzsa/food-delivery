@@ -1,6 +1,7 @@
 import api from '../../api/api';
 import Bootstrap from 'Bootstrap';
 import jQuery from 'jquery';
+import Checkout from '../Checkout/checkout.vue';
 import NavbarComponent from '../Navbar/navbar-component.vue';
 import MenuComponent from '../Menu/menu.vue';
 import PopularOrders from '../Popular-orders/popular-orders.vue';
@@ -13,10 +14,12 @@ export default {
 			popularOrders: [],
 			searchResult: [],
 			keyword: '',
-			searched: false
+			searched: false,
+			checkout:false
 		}
 	},
 	components: {
+		Checkout,
 		NavbarComponent,
 		MenuComponent,
 		PopularOrders
@@ -67,6 +70,9 @@ export default {
 						reject(error);
 					})
 			});
+		},
+		toggleChecoutDialog(){
+			this.checkout=!this.checkout
 		},
 		...mapActions('menu', ['setMenu'])
 	},

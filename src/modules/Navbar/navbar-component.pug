@@ -15,4 +15,4 @@ nav.navbar.navbar-expand-lg.navbar-light
 					i.white-cart.fas.fa-shopping-cart 
 					p.white-cart {{length}}
 				.dropdown-menu(aria-labelledby="navbarDropdown",@click="keepOpen")
-					cart-component(:name="name", :price="price")
+					cart-component(:name="name", :price="price", @on-checkout="checkout")

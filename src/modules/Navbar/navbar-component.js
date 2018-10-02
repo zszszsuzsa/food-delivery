@@ -25,6 +25,9 @@ export default {
         keepOpen(e){
             e.stopPropagation();
         },
+        checkout(){
+            this.$emit('on-checkout')
+        },
         ...mapActions('menu', ['setMenu']),
     },
     computed:{

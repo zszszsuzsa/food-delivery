@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         removeFromCart(){
-            this.$emit('on-remove', this.item, this.index)
+            this.$emit('on-remove', this.item.Id, this.index)
 		}
     }
 }

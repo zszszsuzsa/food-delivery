@@ -14,6 +14,9 @@ export default {
         remainOpen(e) {
             e.stopPropagation();
         },
+        toCheckout(){
+            this.$emit('on-checkout')
+        },
         ...mapActions('cart', ['removeFromCart'])
     },
     computed: {

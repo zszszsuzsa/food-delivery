@@ -1,19 +1,20 @@
 .menuItem
-	.row
-		.col-3
-			.row
-				img.img-fluid(src='../../../images/thumb2.jpg')
-		.col-9
-			.row
-				.col-6
+	b-row
+		b-col(cols="3")
+			b-row
+				b-col
+					img.img-fluid(src='../../../images/thumb2.jpg' alt='food')
+		b-col(cols="9")
+			b-row
+				b-col(cols="6")
 					p {{name}}
-				.col-3 
+				b-col(cols="3")
 					p {{price}} Ft
-				.col-3
+				b-col(cols="3")
 					i.fas.fa-plus-circle(@click="addToCart")
-			.row
-				.col-12 
+			b-row
+				b-col
 					p {{description}}
-			.row
+			b-row
 				span.col-2.vegetarianicon(v-if="vegetarian") Ⓥ
 				i.col-2.fab.fa-gripfire(v-if="spicy")

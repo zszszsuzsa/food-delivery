@@ -3,20 +3,26 @@
 		.modal-content
 			.modal-header
 				h5.modal-title Rendelési adatok megadása
-				button.close(@click="close")
+				button.close(data-dismiss="modal")
 					| ×
 			.modal-body
-				form
-					.form-group
+				.alert.alert-success(v-if="submitStatus ==='SENT'") Sikeres rendelés
+				error-message
+				form(@submit.prevent="submit")
+					.form-group(:class="{ 'form-group--error': $v.name.$error }")
 						label(for="name") Név:
-						input.form-control(type="text", id="name",v-model="name")
-					.form-group
+						input.form-control(type="text", id="name",v-model="name",@keyup='checkInvalid()')
+						.error(v-if="!$v.name.required") *Kötelező kitölteni
+					.form-group(:class="{ 'form-group--error': $v.address.$error }")
 						label(for="name") Cím:
-						input.form-control(type="text", id="address", v-model="address")
-					.form-group
+						input.form-control(type="text", id="address", v-model="address",@keyup='checkInvalid()')
+						.error(v-if="!$v.address.required") *Kötelező kitölteni
+					.form-group(:class="{ 'form-group--error': $v.phone.$error }")
 						label(for="name") Telefon:
-						input.form-control(type="text", id="phone",v-model="phone")
+						input.form-control(type="text", id="phone",v-model="phone",@keyup='checkInvalid()')
+						.error(v-if="!$v.phone.required") *Kötelező kitölteni
 			.modal-footer
-				button.btn.btn-danger(@click="close") Mégsem
-				button.green.btn.btn-primary(type="submit" @click="postCart") Rendelés leadása
+				p.error(v-if="submitStatus ==='ERROR'") Kérem, töltse ki a kötelező adatokat
+				button.btn.btn-danger(data-dismiss="modal") Mégsem
+				button.green.btn.btn-primary(type="submit", :disabled="submitStatus ==='ERROR'", @click="save") Rendelés leadása
 

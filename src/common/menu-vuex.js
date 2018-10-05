@@ -1,13 +1,13 @@
 export const menuState = {
-    menu: []
+	menu: []
 };
 
 export const menuMutations = {
-    setMenu	(state, menu) {
+	setMenu	(state, menu) {
 		state.menu = menu;
-    }
+	}
 };
 
 export const menuActions = {
-    setMenu(context, dataArray) { context.commit('setMenu', dataArray);} ,
+	setMenu(context, dataArray) { context.commit('setMenu', dataArray);}
 };

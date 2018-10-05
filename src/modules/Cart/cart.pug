@@ -1,14 +1,12 @@
 .cart
-	table.table.table-bordered
-		thead
-			tr
-				th A kosár tartalma:	
-		tbody
-			cart-item( v-for="(item, index) in cart", :key='index',:item='item',:index='index', :name="item.Name", :price="item.Price", @on-remove='remove', @click="remainOpen")
-			tr
-				td Összesen:
-				td {{total}} Ft
-			tr.red(v-if='wrongAmount') Maximális rendelés 20 000 Ft!
-			tr
-				td
-					button.btn-success(:disabled="wrongAmount",v-bind:class="{ red: wrongAmount}",data-toggle="modal" data-target="#checkout", @click='toCheckout') Megrendelem
+	p A kosár tartalma:
+	.content
+		table.table.table-bordered
+			thead
+			tbody
+				cart-item( v-for="(item, index) in cart", :key='index',:item='item',:index='index', :name="item.Name", :price="item.Price", @on-remove='remove(item,index)', @click="remainOpen")
+	p Összesen:
+	p {{total}} Ft
+	p.red(v-if='wrongAmount') Maximális rendelés 20 000 Ft!
+	button.btn-warning( @click='clearCart()') Kosár törlése
+	button.btn-success(:disabled="wrongAmount",v-bind:class="{ red: wrongAmount}",data-toggle="modal" data-target="#checkout", @click='toCheckout') Megrendelem

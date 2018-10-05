@@ -2,6 +2,7 @@ import api from '../../api/api';
 import Bootstrap from 'Bootstrap';
 import jQuery from 'jquery';
 import Checkout from '../Checkout/checkout.vue';
+import ErrorMessage from '../error-message/error-message.vue';
 import NavbarComponent from '../Navbar/navbar-component.vue';
 import MenuComponent from '../Menu/menu.vue';
 import PopularOrders from '../Popular-orders/popular-orders.vue';
@@ -20,6 +21,7 @@ export default {
 	},
 	components: {
 		Checkout,
+		ErrorMessage,
 		NavbarComponent,
 		MenuComponent,
 		PopularOrders
@@ -30,27 +32,14 @@ export default {
 		}
 	},
 	methods: {
-
-		getCategories() {
-			return new Promise((resolve, reject) => {
-				api.getCategoryNames().then(result => {
-					resolve(this.message = result.data);
-				})
-					.catch(error => {
-						console.error("Nem sikerült a lekérni a kategóriák neveit", {
-							error: error
-						});
-						reject(error);
-					})
-			});
-		},
 		getPopularOrders() {
 			return new Promise((resolve, reject) => {
 				api.getTopOrders().then(result => {
 					resolve(this.popularOrders = result.data);
 				})
 					.catch(error => {
-						console.error("Nem sikerült a lekérni a legnépszerűbb ételeket", {
+						store.dispatch('error/setError', { segment:'getPopularOrders',errorMessage:'Nem sikerült lekérni a legnépszerűbb rendeléseket',error:true});
+						console.error("Nem sikerült lekérni a legnépszerűbb ételeket", {
 							error: error
 						});
 						reject(error);
@@ -64,19 +53,20 @@ export default {
 					resolve(this.searchResult = result.data, this.searched=true);
 				})
 					.catch(error => {
-						console.error("Nem sikerült a lekérni a találatokat", {
+						store.dispatch('error/setError', { segment:'getPopularOrders',errorMessage:'Nem sikerült lekérni a találatokat',error:true});
+						console.error("Nem sikerült lekérni a találatokat", {
 							error: error
 						});
 						reject(error);
 					})
 			});
 		},
-		toggleChecoutDialog(){
-			this.checkout=!this.checkout
-		},
 		...mapActions('menu', ['setMenu'])
 	},
-	mounted() {
+	computed: {
+	...mapState('error',['hasError'])	
+	},
+	created() {
 		this.getPopularOrders();
 	}
 }

@@ -1,18 +1,15 @@
-nav.navbar.navbar-expand-lg.navbar-light
-	a.navbar-brand(href='#') 
+b-navbar(toggleable='md', sticky=true)
+	b-navbar-brand(href='#')
 		i.fas.fa-utensils 
 		p Ételfutár
-	form.form-inline.my-2.my-lg-0(action="#")
-		input.form-control.mr-sm-2(type='search', placeholder='Keresés', aria-label='Search' v-model="keyword")
-		button.btn.btn-outline-light(@click="searchKeyword")
-			i.fas.fa-search
-	button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-		span.navbar-toggler-icon
-	#navbarSupportedContent
-		ul.navbar-nav.mr-auto.col-12
-			li.nav-item.dropdown
-				a#navbarDropdown.nav-link.dropdown-toggle.btn.btn-outline-light(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Kosár
-					i.white-cart.fas.fa-shopping-cart 
-					p.white-cart {{length}}
-				.dropdown-menu(aria-labelledby="navbarDropdown",@click="keepOpen")
-					cart-component(:name="name", :price="price", @on-checkout="checkout")
+	b-nav-form.form-inline(action="#")
+			b-form-input.mr-sm-2(size='sm', type='text', placeholder='Keresés', v-model="keyword")
+			b-button.my-2.my-sm-0.btn-outline-light(@click="searchKeyword",size='sm', type='submit')
+				i.fas.fa-search
+	b-navbar-nav.ml-auto
+		b-nav-item-dropdown(right='')
+			template(slot='button-content').white-cart.fas.fa-shopping-cart Kosár
+				i.white-cart.fas.fa-shopping-cart 
+				p.white-cart {{length}} termék
+			em
+				cart-component(:name="name", :price="price", @on-checkout="checkout")

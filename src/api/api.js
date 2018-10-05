@@ -1,9 +1,6 @@
 import axios from 'axios';
 
 export default {
-    getAll(){
-        return axios.get(`http://localhost:8080/api/all`)
-    },
     getCategoryNames(){
         return axios.get(`http://localhost:8080/categorynames`)
     },

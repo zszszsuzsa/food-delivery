@@ -8,15 +8,6 @@ const con = mysql.createConnection({
   password: "password"
 });
 
-const cors = require('cors');
-app.use(cors({
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
-  'origin': 'http://localhost:8081',
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
-}));
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Expose-Headers", "ETag", 'Access-Control-Allow-Origin');
   res.header("Access-Control-Allow-Origin", "*");
@@ -25,14 +16,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static('public'))
-
-app.get('/api/all', function (req, res) {
-
-  con.query('SELECT * FROM dbo.MenuItems', function (err, rows, fields) {
-    if (err) throw err;
-    res.json(rows);
-  });
-});
 
 app.get('/api/:id', function (req, res) {
   let id = req.params.id;
@@ -59,7 +42,7 @@ app.get('/categorynames', function (req, res) {
 
 // Top orders Sum
 app.get('/popular', function (req, res) {
-  sql= 'SELECT Id,Name,Price,sum(Quantity)as Quantity FROM (SELECT * FROM dbo.Orders LEFT JOIN dbo.Menuitems ON dbo.Orders.Menu_item_id = dbo.Menuitems.Id) as Aggr GROUP BY Name Order BY Quantity DESC limit 10'
+  sql= 'SELECT Id,Name,Price,Description,Vegetarian,Spicy,sum(Quantity)as Quantity FROM (SELECT * FROM dbo.Orders LEFT JOIN dbo.Menuitems ON dbo.Orders.Menu_item_id = dbo.Menuitems.Id) as Aggr GROUP BY Id Order BY Quantity DESC limit 10'
   con.query(sql, function (err, rows, fields) {
     if (err) throw err;
     res.json(rows);
@@ -90,6 +73,8 @@ app.use(bodyParser.urlencoded({
  */
 app.use(bodyParser.json());
 
+
+//Insert into database
 app.post('/orderdata', function (req, res) {
   var values=req.body;
     con.query('INSERT INTO dbo.Orders(Menu_item_id,Buyer_name,Buyer_address,Buyer_phone)VALUES ?', [values], function (err) {

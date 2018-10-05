@@ -1,0 +1,4 @@
+div
+	.row.padding-16(v-for='e in hasError', v-if="e.error")
+		.error-row
+			p.error-message {{e.errorMessage}}

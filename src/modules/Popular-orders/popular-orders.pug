@@ -1,4 +1,3 @@
-.popular-orders
-    p Legnépszerűbb termékek:
-    .container
-        popular-item(v-for='p in popularOrders',:key='p.Id',:popularItem='p', :name='p.Name', :price='p.Price', @on-forwardToCart='sendToCart')
+.popular-orders.container
+	button.title.green(@click='toggle') Legnépszerűbb termékek:
+	menu-item(v-for='menuItem in popularOrders',:key="menuItem.Id", :menuItem='menuItem', :description='menuItem.Description', :name='menuItem.Name', :price='menuItem.Price', :spicy='menuItem.Spicy', :vegetarian='menuItem.Vegetarian', @on-forwardToCart="sendToCart",v-if="open")

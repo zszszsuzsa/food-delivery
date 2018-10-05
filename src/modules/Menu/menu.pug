@@ -1,5 +1,8 @@
 div
 	.row.justify-content-center
 		category-item(v-for='category in categories',:key='category.Category', :category='category.Category', :menu='menu' @on-select-category='getMenuByCategory')
+	p.signs
+		span.col-2.vegetarianicon Ⓥ =vegetáriánus
+		i.col-2.fab.fa-gripfire =csípős
 	p.search-result(v-if='searched') A keresés eredménye:
 	menu-item(v-for='menuItem in menu',:key="menuItem.Id", :menuItem='menuItem', :description='menuItem.Description', :name='menuItem.Name', :price='menuItem.Price', :spicy='menuItem.Spicy', :vegetarian='menuItem.Vegetarian', @on-forwardToCart="sendToCart")

@@ -1,6 +1,12 @@
-	.show{
-		display:block;
-	}
+.show{
+	display:block;
+}
 label{
 	font-weight:bold;
+}
+.error{
+color:red;
+}
+p.error{
+float:left;
 }

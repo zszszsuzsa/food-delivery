@@ -1,3 +1,4 @@
+import BootstrapVue from 'bootstrap-vue';
 export default{
 	props: {
 		name: {

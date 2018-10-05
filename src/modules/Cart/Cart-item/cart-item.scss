@@ -1,7 +1,10 @@
 .itemname{
-    overflow: hidden;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .remove{
-    color:red;
+	color:red;
 }
+.cart-item{
+	overflow-y:scroll;
+	max-height:300px;}
